@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STOOP. Creator merch marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap">
+<style>
+/* ===== 1. THEME TOKENS: black / cream / lime, light + dark ===== */
+:root{color-scheme:light;--bg:#f1ebd8;--fg:#000;--mut:#5e5a4b;--card:#e3dcc3;--spot:#fbf7ea;--line:rgba(0,0,0,.18);--hbg:rgba(241,235,216,.92);--lime:#c8ff2d;--ink:#000;--b:'Bricolage Grotesque',system-ui,sans-serif;--d:'Bricolage Grotesque',Impact,'Arial Narrow',sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#000;--fg:#f1ebd8;--mut:#9d9886;--card:#161612;--spot:#2b2a22;--line:rgba(241,235,216,.2);--hbg:rgba(0,0,0,.92)}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#000;--fg:#f1ebd8;--mut:#9d9886;--card:#161612;--spot:#2b2a22;--line:rgba(241,235,216,.2);--hbg:rgba(0,0,0,.92)}
+
+/* ===== 2. BASE ===== */
+*,*::before,*::after{box-sizing:inherit;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.5 var(--b);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:inherit}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+.w{width:min(1240px,100% - 2.5rem);margin-inline:auto}
+.d{font-family:var(--d);font-weight:800;font-stretch:75%;text-transform:uppercase;line-height:.88;letter-spacing:-.01em}
+.hd{color:var(--mut);font-size:.9rem}
+.btn{display:inline-flex;align-items:center;padding:.9rem 1.5rem;border-radius:99px;font-weight:700;border:2px solid var(--fg);transition:.2s}
+.btn.p{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:4px 4px 0 var(--fg)}
+.row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem}
+
+/* ===== 3. HEADER + MOBILE MENU ===== */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--hbg);backdrop-filter:blur(14px);border-bottom:2px solid var(--fg)}
+.bar{display:flex;align-items:center;gap:.6rem;height:64px}
+.logo{font-size:2rem;display:flex;align-items:baseline;gap:.05em}.logo b{width:.3em;height:.3em;background:var(--lime);border:2px solid var(--fg);border-radius:50%}
+nav{display:none;gap:1.6rem;margin-left:2rem;font-weight:600}
+nav a:hover{text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:4px;text-underline-offset:6px}
+.sp{flex:1}
+.ib{display:grid;place-items:center;height:42px;min-width:42px;padding:0 .9rem;border:2px solid var(--fg);border-radius:99px;font-weight:700;font-size:.85rem;transition:.2s}
+.ib:hover{background:var(--lime);color:var(--ink)}
+.cnt{background:var(--lime);color:var(--ink);border-radius:99px;padding:0 .5em;margin-left:.4em}
+#menu{display:none;flex-direction:column;padding:.5rem 1.25rem 1.2rem;border-top:2px solid var(--fg)}#menu.on{display:flex}
+#menu a{font-size:2.6rem;padding:.2rem 0}
+
+/* ===== 4. HERO (page-load sequence is the one big motion) ===== */
+.hero{padding:2rem 0 3rem;display:grid;gap:2.2rem}
+.hero h1{font-size:clamp(4.2rem,21vw,11rem)}
+.hl{display:block;overflow:hidden;padding-bottom:.04em}.hl span{display:block;animation:up .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*.12s)}
+.hl.l span{display:inline-block;background:var(--lime);color:var(--ink);padding:0 .1em}
+@keyframes up{from{transform:translateY(105%)}}
+.hero p{max-width:32ch;font-size:1.2rem;margin-top:1.4rem}
+.cd{display:inline-flex;gap:.6rem;align-items:center;border:2px solid var(--fg);border-radius:99px;padding:.35rem .9rem;font-weight:700;font-size:.85rem;margin-bottom:1.2rem;font-variant-numeric:tabular-nums}
+.cd i{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--fg)}
+.stack{position:relative;height:min(96vw,440px)}
+.stack .ph{position:absolute;width:54%;transform:rotate(var(--r));animation:drop .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.5s + var(--i)*.15s);box-shadow:0 18px 30px -12px rgba(0,0,0,.45)}
+.stack .ph:nth-child(1){left:0;top:10%;--r:-6deg;--i:0}
+.stack .ph:nth-child(2){right:0;top:0;--r:5deg;--i:1}
+.stack .ph:nth-child(3){left:24%;bottom:0;width:46%;--r:-1deg;--i:2}
+@keyframes drop{from{opacity:0;transform:translateY(70px) rotate(calc(var(--r) + 12deg))}}
+
+/* ===== 5. TICKER ===== */
+.mq{background:var(--lime);color:var(--ink);border-block:2px solid var(--fg);overflow:hidden;white-space:nowrap;transform:rotate(-1.2deg);margin:1rem -3vw}
+.mq div{display:inline-block;padding:.6rem 0;animation:mq 40s linear infinite;font-size:1.6rem}
+.mq span{margin:0 1.4rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ===== 6. SECTION HEADS, PRODUCT PHOTOS, PRODUCT CARDS ===== */
+.sh{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin:4.5rem 0 1.5rem}
+.sh h2{font-size:clamp(2.8rem,10vw,5.6rem)}
+.sh a,.sh button{font-weight:700;border-bottom:3px solid var(--lime);white-space:nowrap}
+.ph{display:block;width:100%;aspect-ratio:4/5;border-radius:10px;background:radial-gradient(circle at 50% 38%,var(--spot),var(--card) 74%);border:2px solid var(--fg);overflow:hidden;display:grid;place-items:center;padding:0}
+.ph svg{width:86%;filter:drop-shadow(0 14px 12px rgba(0,0,0,.3));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.pc:hover .ph svg{transform:scale(1.08) rotate(-2deg)}
+.chips{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1.2rem;padding-bottom:.3rem}
+.chip{border:2px solid var(--fg);border-radius:99px;padding:.45rem 1.1rem;font-weight:700;white-space:nowrap;transition:.2s}
+.chip.on,.chip:hover{background:var(--lime);color:var(--ink)}
+.pg{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem .8rem}
+.pw{position:relative}
+.pt{position:absolute;left:-.3rem;bottom:.8rem;background:var(--lime);color:var(--ink);border:2px solid var(--fg);padding:.1rem .6rem;font-weight:800;transform:rotate(-4deg)}
+.tag{position:absolute;top:.6rem;left:.6rem;background:var(--fg);color:var(--bg);font-size:.75rem;font-weight:700;padding:.15rem .6rem;border-radius:99px}
+.hb{position:absolute;top:.5rem;right:.5rem;width:38px;height:38px;border-radius:50%;background:var(--hbg);border:2px solid var(--fg);display:grid;place-items:center;transition:.2s}
+.hb.on{background:var(--lime);color:var(--ink);transform:scale(1.12)}
+.pi{display:flex;justify-content:space-between;align-items:start;gap:.5rem;padding-top:.6rem}
+.pi h3{font-size:1rem;line-height:1.2}
+.add{background:var(--fg);color:var(--bg);border-radius:99px;font-weight:700;padding:.35rem .9rem;font-size:.85rem;transition:.2s}
+.add:hover{background:var(--lime);color:var(--ink)}
+
+/* ===== 7. CREATORS ===== */
+.cr{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;margin-inline:-1.25rem;padding-inline:1.25rem}
+.cc{scroll-snap-align:start;border:2px solid var(--fg);border-radius:16px;overflow:hidden;background:var(--card);transition:.25s}
+.cc:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--lime),6px 6px 0 2px var(--fg)}
+.bn{height:100px}
+.av{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-size:2rem;margin:-38px 0 0 1.1rem;border:4px solid var(--card);background:var(--lime);color:var(--ink)}
+.av.k{background:var(--fg);color:var(--bg)}
+.cb{padding:.6rem 1.1rem 1.2rem}.cb h3{font-size:1.3rem}
+
+/* ===== 8. CATEGORIES (Explore page teaser) ===== */
+.cat{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.ct{position:relative;aspect-ratio:1;border:2px solid var(--fg);border-radius:16px;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:.3s}
+.ct:hover{background:var(--lime);color:var(--ink)}
+.ct .d{font-size:clamp(2.2rem,9vw,3.6rem);position:relative}
+.gs{position:absolute;right:-14%;bottom:-14%;width:80%;opacity:.16;transition:.5s}.ct:hover .gs{transform:rotate(-8deg) scale(1.08)}
+
+/* ===== 9. CREATOR CTA ===== */
+.sell{background:var(--fg);color:var(--bg);border-radius:24px;padding:2rem 1.4rem;margin-top:4.5rem}
+.sell h2{font-size:clamp(2.8rem,11vw,6.4rem);max-width:12ch}
+.steps{display:grid;gap:1rem;margin-top:2rem}
+.st{border-top:2px solid var(--bg);padding-top:.8rem}.st b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--lime);color:var(--ink);margin-bottom:.4rem}
+.st h3{font-size:1.4rem}.st p{opacity:.75}
+
+/* ===== 10. FOOTER, CART DRAWER, TOAST ===== */
+footer{margin-top:5rem;border-top:2px solid var(--fg);padding:2rem 0 3rem;display:grid;gap:1rem}
+.fl{display:flex;flex-wrap:wrap;gap:1.2rem;font-weight:600}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.3s;z-index:65}#ov.on{opacity:1;pointer-events:auto}
+#cart{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--bg);border-left:2px solid var(--fg);transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:70;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 1rem) 1.25rem calc(env(safe-area-inset-bottom,0px) + 1rem)}#cart.open{transform:none}
+.ch{display:flex;justify-content:space-between;align-items:center}.ch h2{font-size:2.6rem}
+#ci{flex:1;overflow-y:auto;margin:1rem 0}
+.li{display:grid;grid-template-columns:70px 1fr auto;gap:.8rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.li .ph{border-width:1px;border-radius:6px}
+.q button{width:28px;height:28px;border:2px solid var(--fg);border-radius:50%;text-align:center}
+.q span{margin:0 .5rem;font-weight:700}
+.tt{display:flex;justify-content:space-between;font-weight:800;font-size:1.3rem;margin-bottom:.8rem}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 1.2rem);transform:translate(-50%,160%);background:var(--lime);color:var(--ink);border:2px solid var(--fg);padding:.7rem 1.2rem;border-radius:99px;font-weight:700;z-index:80;transition:.3s;max-width:90vw;text-align:center}#toast.show{transform:translate(-50%,0)}
+
+/* ===== 11. DESKTOP ===== */
+@media(min-width:860px){
+nav{display:flex}.mb,#menu{display:none!important}
+.hero{grid-template-columns:1.2fr .8fr;align-items:center;padding:4rem 0 5rem}.stack{height:540px}
+.pg{grid-template-columns:repeat(4,1fr)}
+.cr{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;overflow:visible;margin:0;padding:0}
+.cat{grid-template-columns:repeat(4,1fr)}
+.steps{grid-template-columns:repeat(3,1fr)}.sell{padding:4rem}.sh{margin-top:6.5rem}
+footer{grid-template-columns:1fr auto;align-items:center}}
+/* ===== 12. MARKETPLACE AREAS: customer, creator, admin ===== */
+.dk{display:none}
+#view .sh{margin:1.6rem 0 1rem}.sh h1{font-size:clamp(2.6rem,9vw,5rem)}
+.pv{margin:1.2rem 0 .8rem;padding:.7rem 1rem;border:2px dashed var(--fg);border-radius:12px;background:var(--card);font-size:.9rem}
+.cg{display:grid;gap:1rem}.cw{max-width:640px}.cw .btn{margin:.8rem 0}.lede{font-size:1.2rem;max-width:40ch}
+.pd{display:grid;gap:1.4rem;margin-top:1.5rem}.pd h1{font-size:clamp(2.6rem,9vw,4.4rem);margin:.4rem 0}.pr{font-size:1.8rem;font-weight:800;margin-bottom:1rem}
+.bn.big{height:140px;border:2px solid var(--fg);border-radius:16px;margin-top:1.4rem}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}.stt{border:2px solid var(--fg);border-radius:16px;padding:1rem}.stt b{display:block;font-size:2.6rem}
+.tb{overflow-x:auto;border:2px solid var(--fg);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:480px}th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.85rem;color:var(--mut)}
+.bd{display:inline-block;padding:.1rem .7rem;border:2px solid var(--fg);border-radius:99px;font-weight:700;font-size:.8rem;white-space:nowrap}.bd.approved{background:var(--lime);color:var(--ink)}.bd.pending{border-style:dashed}.bd.rejected{color:#ff5a36;border-color:#ff5a36}
+.fm{display:grid;gap:1rem;max-width:520px;margin-top:1.2rem}.fm label{display:grid;gap:.3rem;font-weight:600}
+input,select,textarea{font:inherit;color:inherit;background:var(--card);border:2px solid var(--fg);border-radius:10px;padding:.7rem .8rem;width:100%}
+.nc{display:none;padding:.7rem 1rem;border-left:6px solid var(--lime);background:var(--card)}.nc.on{display:block}
+.sm{padding:.4rem .9rem;font-size:.85rem;margin:0 .3rem .3rem 0}button:disabled{opacity:.5;cursor:not-allowed}
+@media(min-width:860px){.dk{display:grid}.cg{grid-template-columns:repeat(3,1fr)}.pd{grid-template-columns:1fr 1fr;gap:3rem;align-items:start}.sg{grid-template-columns:repeat(4,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER (shared across all future pages) ===== -->
+<header><div class="w bar">
+  <a href="#top" class="logo d">STOOP<b></b></a>
+  <nav><a href='#explore'>Explore</a><a href='#creators'>Creators</a><a href='#creator-apply'>Sell your merch</a></nav>
+  <span class="sp"></span>
+  <button class="ib" id="th" data-a="theme" aria-label="Switch theme"></button>
+  <a class='ib dk' href='#login' data-au>Sign in</a><button class="ib" data-a="cart" aria-label="Open bag">Bag<span class="cnt">0</span></button>
+  <button class="ib mb" data-a="menu" aria-label="Menu">Menu</button>
+</div>
+<div id="menu" class="w d"><a href='#explore' data-a='menu'>Explore</a><a href='#creators' data-a='menu'>Creators</a><a href='#creator-apply' data-a='menu'>Sell</a><a href='#login' data-a='menu' data-au>Sign in</a></div>
+</header>
+
+<main id="top">
+<!-- ===== SECTION: HERO ===== -->
+<section class="hero w" data-section="hero">
+  <div>
+    <div class="cd"><i></i>Next drop in <span id="cd">--:--:--</span></div>
+    <h1 class="d"><span class="hl"><span style="--i:0">Made by</span></span><span class="hl l"><span style="--i:1">creators.</span></span><span class="hl"><span style="--i:2">Worn first.</span></span></h1>
+    <p>Artists, streamers and musicians design it. We print it, ship it and pay them. Small runs, no restocks.</p>
+    <div class="row"><a class="btn p" href="#trending">Shop trending</a><a class="btn" href="#sell">Open your stoop</a></div>
+  </div>
+  <div class="stack" id="stack" aria-hidden="true"></div>
+</section>
+
+<!-- ===== SECTION: TICKER ===== -->
+<div class="mq d" aria-hidden="true"><div id="mq"></div></div>
+
+<!-- ===== SECTION: FEATURED CREATORS (API.creators) ===== -->
+<section id="creators" class="w" data-section="creators">
+  <div class="sh"><h2 class="d">Creators<br>to watch</h2><a href='#creators'>See all creators</a></div>
+  <div class="cr" id="cr"></div>
+</section>
+
+<!-- ===== SECTION: TRENDING MERCH (API.products) ===== -->
+<section id="trending" class="w" data-section="trending">
+  <div class="sh"><h2 class="d">Trending<br>right now</h2><a href='#explore'>Explore everything</a></div>
+  <div class="chips" id="chips"></div>
+  <div class="pg" id="pg"></div>
+</section>
+
+<!-- ===== SECTION: CATEGORIES (API.cats) ===== -->
+<section class="w" data-section="categories">
+  <div class="sh"><h2 class="d">Shop by<br>piece</h2></div>
+  <div class="cat" id="cat"></div>
+</section>
+
+<!-- ===== SECTION: CREATOR SIGN-UP CTA (leads to creator dashboard) ===== -->
+<section id="sell" class="w" data-section="sell">
+  <div class="sell">
+    <h2 class="d">Your art. Your store. Your cut.</h2>
+    <div class="steps">
+      <div class="st"><b>1</b><h3>Upload your designs</h3><p>Drop in artwork and pick the pieces it goes on.</p></div>
+      <div class="st"><b>2</b><h3>Customise products</h3><p>Choose colours, placement and your own price.</p></div>
+      <div class="st"><b>3</b><h3>Get approved and go live</h3><p>We review every creator and design, then your storefront opens.</p></div>
+    </div>
+    <div class="row"><a class='btn p' href='#creator-apply'>Apply as a creator</a></div>
+  </div>
+</section>
+</main>
+<main id='view' class='w' hidden></main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="w">
+  <div><div class="logo d">STOOP<b></b></div><p class="hd">Prototype with sample creators and products.</p></div>
+  <div class='fl'><a href='#explore'>Explore</a><a href='#creators'>Creators</a><a href='#creator-apply'>Sell with us</a><a href='#creator-dashboard'>Creator area (preview)</a><a href='#admin-login'>Admin (preview)</a></div>
+</footer>
+
+<!-- ===== CART DRAWER + TOAST ===== -->
+<div id="ov" data-a="cart"></div>
+<aside id="cart" aria-label="Your bag"><div class="ch"><h2 class="d">Your bag</h2><button class="ib" data-a="cart">Close</button></div><div id="ci"></div><div class="tt"><span>Total</span><span id='tot'>₹0</span></div><button class='btn p' data-a='go' data-id='cart'>View bag</button></aside>
+<div id="toast" role="status"></div>
+
+<script>
+/* ===== AUTH CONFIG: paste your own Supabase project values here =====
+// SUPABASE_URL: your project URL, e.g. https://abcd1234.supabase.co
+// SUPABASE_PUBLISHABLE_KEY: the public publishable key ONLY (safe in the browser). Never put a secret or service_role key in this file.
+// SITE_URL: the live STOOP address, no trailing slash. Email links return here. Prefer your stable production domain over a per-deployment URL.
+// Also set the same address in Supabase: Authentication > URL Configuration > Site URL, and add it to Redirect URLs.
+// (That dashboard Site URL is where the localhost:3000 links come from.) */
+window.STOOP_CONFIG={
+SUPABASE_URL:'https://hvmwuqtjxgumvvdrxhzo.supabase.co',
+SUPABASE_PUBLISHABLE_KEY:'sb_publishable_syz9Y3wdN_kOyiUUGjqnZw_V7EzPklz',
+SITE_URL:'https://stoopcreatormerchmarketplace.vercel.app'
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9"></script>
+<script>
+/* ===== A. DATA: replace with database records later ===== */
+const DATA={
+creators:[
+{id:'mika',name:'Mika Mori',h:'@mika.mori',niche:'Illustrator drawing moth girls and neon city nights.',f:'412K',g:['#c8ff2d','#000']},
+{id:'thrift',name:'Theo Thrift',h:'@thrift.god',niche:'Thrift haul king. Styles whole fits for under $30.',f:'1.2M',g:['#f1ebd8','#4a4a3a']},
+{id:'lagos',name:'Ada Lagos',h:'@lagosloop',niche:'Afrobeats dance creator out of Lagos and London.',f:'880K',g:['#c8ff2d','#2e3320']},
+{id:'pixel',name:'Pixel Papi',h:'@pixelpapi',niche:'Retro game streamer. Glitch art and loud merch.',f:'640K',g:['#111','#c8ff2d']},
+{id:'sol',name:'Sol Reyes',h:'@sol.sketches',niche:'Zine maker with slow-living doodles.',f:'96K',g:['#f1ebd8','#c8ff2d']},
+{id:'noct',name:'DJ Nocturne',h:'@dj.nocturne',niche:'Bedroom producer. Warehouse-rave graphics.',f:'305K',g:['#111','#7d7a68']}],
+products:[
+{id:1,n:'No Signal Boxy Tee',cr:'pixel',t:'tee',c:'#111',i:'#c8ff2d',w:'NO SIGNAL',g:'bolt',p:1499,tag:'Trending'},
+{id:2,n:'Moth Girl Heavy Hoodie',cr:'mika',t:'hoodie',c:'#ece5cf',i:'#000',w:'MOTH GIRL',g:'star',p:2999,tag:'New drop'},
+{id:3,n:'Second Hand First Class Hoodie',cr:'thrift',t:'hoodie',c:'#c8ff2d',i:'#000',w:'2ND HAND',g:'ring',p:2799,tag:'Selling fast'},
+{id:4,n:'Lagos Loop Canvas Tote',cr:'lagos',t:'tote',c:'#ece5cf',i:'#000',w:'LAGOS LOOP',g:'smile',p:799,tag:'Bestseller'},
+{id:5,n:'Sol Sunday Tee',cr:'sol',t:'tee',c:'#7d7a68',i:'#f1ebd8',w:'SUNDAY',g:'smile',p:1299,tag:'New drop'},
+{id:6,n:'Nocturne Dad Cap',cr:'noct',t:'cap',c:'#111',i:'#c8ff2d',w:'NOCT',g:'star',p:899,tag:'Limited'},
+{id:7,n:'Glitch Smiley Tee',cr:'pixel',t:'tee',c:'#ece5cf',i:'#000',w:'GLITCH',g:'smile',p:1299,tag:''},
+{id:8,n:'Moth Girl Tote',cr:'mika',t:'tote',c:'#111',i:'#f1ebd8',w:'MOTH GIRL',g:'star',p:749,tag:'Low stock'},
+{id:9,n:'Static Zip Hoodie',cr:'noct',t:'hoodie',c:'#111',i:'#f1ebd8',w:'STATIC',g:'bolt',p:3199,tag:'Trending'},
+{id:10,n:'Slow Down Cap',cr:'sol',t:'cap',c:'#ece5cf',i:'#000',w:'SLOW',g:'ring',p:849,tag:''},
+{id:11,n:'Vintage Haul Tee',cr:'thrift',t:'tee',c:'#2e3320',i:'#c8ff2d',w:'HAUL',g:'star',p:1399,tag:'Selling fast'},
+{id:12,n:'Afterparty Tee',cr:'lagos',t:'tee',c:'#c8ff2d',i:'#000',w:'AFTERPARTY',g:'bolt',p:1399,tag:'New drop'}]};
+
+
+/* ===== B. API LAYER: mocked, swap each body for fetch('/api/...') ===== */
+const API={
+creators:async()=>DATA.creators,
+products:async(t)=>DATA.products.filter(p=>ok(p)&&(!t||p.t===t)),
+cats:async()=>[['tee','Tees'],['hoodie','Hoodies'],['tote','Totes'],['cap','Caps']].map(([k,n])=>({k,n,c:DATA.products.filter(p=>ok(p)&&p.t===k).length}))};
+
+/* ===== C. PRODUCT ART: stand-in studio shots, swap for real photos ===== */
+const G={tee:'<path d="M70 28 40 42 14 78l24 16 17-13v94h90V81l17 13 24-16-26-36-30-14q-30 22-60 0z"/>',
+hoodie:'<path d="M72 26q28-24 56 0l32 14 28 80-24 10-12-30v82H48v-82l-12 30-24-10 28-80z"/><path d="M78 28q22 34 44 0" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="3"/>',
+tote:'<path d="M58 76h84l10 108H48z"/><path d="M80 76c-6-52 46-52 40 0" fill="none" stroke="currentColor" stroke-width="6"/>',
+cap:'<path d="M42 128q0-70 58-70t58 70z"/><path d="M36 128q70-10 140 8-6 12-70 4-40-2-70-12z"/>'};
+const GL={star:'<path d="M0-38l5.5 11.5 12.5 1.7-9.1 8.8 2.2 12.5L0-9.5l-11.1 6 2.2-12.5-9.1-8.8 12.5-1.7z"/>',
+smile:'<circle cy="-24" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="-4.5" cy="-27" r="2"/><circle cx="4.5" cy="-27" r="2"/><path d="M-7-20q7 7 14 0" fill="none" stroke="currentColor" stroke-width="2.6"/>',
+bolt:'<path d="M4-38-10-17h9l-5 17 16-24H3l5-14z"/>',
+ring:'<circle cy="-24" r="12" fill="none" stroke="currentColor" stroke-width="6"/>'};
+const PT={tee:[118,1],hoodie:[116,1],tote:[142,1.1],cap:[108,.55]};
+const art=p=>{const[y,s]=PT[p.t];return `<svg viewBox="0 0 200 200" role="img" aria-label="${p.n}"><g fill="${p.c}" stroke="rgba(127,127,110,.5)" stroke-width="1.5" style="color:${p.c}">${G[p.t]}</g><g transform="translate(100 ${y}) scale(${s})" fill="${p.i}" style="color:${p.i}">${GL[p.g]}<text text-anchor="middle" font-family="Bricolage Grotesque,Impact,sans-serif" font-weight="800" font-size="${Math.min(26,214/p.w.length)}">${p.w}</text></g></svg>`};
+
+/* ===== D. COMPONENTS: pure render functions, one per UI block ===== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],R=document.documentElement;
+const S={c:{},w:new Set(),fo:new Set(),k:''};
+const byId=id=>DATA.products.find(p=>p.id==id);
+const Card=p=>{const c=DATA.creators.find(x=>x.id===p.cr),w=S.w.has(p.id);return `<article class="pc"><div class="pw"><button class="ph" data-a='go' data-id='product-${p.id}' aria-label="${p.n}">${art(p)}</button><span class='pt'>${inr(p.p)}</span>${p.tag?`<span class="tag">${p.tag}</span>`:''}<button class="hb${w?' on':''}" data-a="w" data-id="${p.id}" aria-label="Save ${p.n}">${w?'♥':'♡'}</button></div><div class="pi"><div><h3>${p.n}</h3><button class="hd" data-a='go' data-id='store-${c.id}'>${c.h}</button></div><button class="add" data-a="add" data-id="${p.id}">Add</button></div></article>`};
+const Creator=(c,i)=>`<article class="cc"><div class="bn" style="background:linear-gradient(120deg,${c.g[0]},${c.g[1]})"></div><div class="av d${i%2?' k':''}">${c.name.split(' ').map(x=>x[0]).join('')}</div><div class="cb"><h3>${c.name} ✓</h3><p class="hd">${c.h}, ${c.f} followers</p><p>${c.niche}</p><div class="row"><button class="btn p" data-a="fo" data-id="${c.id}">Follow</button><button class="btn" data-a='go' data-id='store-${c.id}'>Visit stoop</button></div></div></article>`;
+const Cat=c=>`<a href="#trending" class="ct" data-a="cat" data-id="${c.k}"><span class="d">${c.n}</span><span><b>${c.c} designs</b></span><svg class="gs" viewBox="0 0 200 200"><g fill="currentColor">${G[c.k]}</g></svg></a>`;
+const Line=(id,q)=>{const p=byId(id);return `<div class="li"><div class="ph">${art(p)}</div><div><b>${p.n}</b><div class="q"><button data-a="q" data-id="${id}" data-d="-1" aria-label="Less">−</button><span>${q}</span><button data-a="q" data-id="${id}" data-d="1" aria-label="More">+</button></div></div><b>${inr(p.p*q)}</b></div>`};
+
+/* ===== E. STATE + ACTIONS ===== */
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2300)};
+const cart=v=>{$('#cart').classList.toggle('open',v);$('#ov').classList.toggle('on',v)};
+const renderCart=()=>{let t=0,n=0;const ids=Object.keys(S.c);$('#ci').innerHTML=ids.length?ids.map(id=>{t+=byId(id).p*S.c[id];n+=S.c[id];return Line(id,S.c[id])}).join(''):'<p class="hd">Your bag is empty. Add a piece from the trending drops.</p>';$('#tot').textContent=inr(t);$$('.cnt').forEach(e=>e.textContent=n)};
+const filter=async k=>{S.k=k;$$('.chip').forEach(c=>c.classList.toggle('on',c.dataset.id===k));$('#pg').innerHTML=(await API.products(k)).slice(0,8).map(Card).join('')};
+const dark=()=>R.dataset.theme?R.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+const sync=()=>$('#th').textContent=dark()?'Light':'Dark';
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;if(b.tagName==='A'&&a!=='cat'&&b.getAttribute('href')==='#')e.preventDefault();
+if(a==='stub'){e.preventDefault();toast(id+' is coming in the next build step.')}
+if(a==='theme'){R.dataset.theme=dark()?'light':'dark';sync()}
+if(a==='cart')cart(!$('#cart').classList.contains('open'));
+if(a==='menu')$('#menu').classList.toggle('on');
+if(a==='f')filter(id);
+if(a==='cat')filter(id);
+if(a==='add'){S.c[id]=(S.c[id]||0)+1;renderCart();toast(byId(id).n+' added to your bag.')}
+if(a==='q'){S.c[id]+=+b.dataset.d;if(S.c[id]<1)delete S.c[id];renderCart()}
+if(a==='w'){const k=+id;S.w.has(k)?S.w.delete(k):S.w.add(k);b.classList.toggle('on');b.textContent=S.w.has(k)?'♥':'♡'}
+if(a==='fo'){S.fo.has(id)?S.fo.delete(id):S.fo.add(id);b.classList.toggle('p');b.textContent=S.fo.has(id)?'Following':'Follow'}});
+addEventListener('keydown',e=>{if(e.key==='Escape')cart(false)});
+
+/* ===== G. ARCHITECTURE: views (V) -> role-scoped data access (db) -> adapters =====
+   Every adapter here is an in-memory mock with sample data. Later each db method becomes a Supabase call
+   (Auth, Postgres, Storage) plus a print-on-demand API. The browser only mirrors these rules; the database must enforce them:
+   1. Public reads return products with status approved only.
+   2. Creators read and write only rows where creator_id is their own (row-level security on auth.uid()).
+   3. Only the admin role can change creator or product status. */
+const SVC={auth:['Sign-in','Supabase Auth'],db:['Database','Supabase Postgres with row-level security'],pay:['Payments','Payment gateway'],pod:['Print-on-demand','Fulfilment API']};
+const ME={cr:'mika'}; /* PREVIEW ONLY: the real creator id comes from the signed-in session */
+const SH=.35; /* placeholder creator share of each sale, not a business decision */
+DATA.products.push(
+{id:13,n:'Dream Logic Tee',cr:'mika',t:'tee',c:'#ece5cf',i:'#000',w:'DREAMS',g:'star',p:1399,st:'pending'},
+{id:14,n:'Night Bus Hoodie',cr:'mika',t:'hoodie',c:'#111',i:'#c8ff2d',w:'NIGHT BUS',g:'ring',p:2899,st:'rejected',note:'Print sits too close to the seams. Resize and resubmit.'},
+{id:15,n:'Wall Hit Cap',cr:'pixel',t:'cap',c:'#c8ff2d',i:'#000',w:'WALL HIT',g:'bolt',p:899,st:'pending'});
+DATA.products.forEach(p=>p.st=p.st||'approved');
+DATA.apps=[{id:1,name:'Rhea Kapoor',h:'@rhea.draws',plat:'Instagram, 210K',st:'pending'},{id:2,name:'Kabir Shah',h:'@kabir.kicks',plat:'YouTube, 88K',st:'pending'},{id:3,name:'Zoya Dsouza',h:'@zoya.zines',plat:'Instagram, 34K',st:'rejected'}];
+DATA.orders=[{id:'STP-1042',pid:1,q:2,s:'Shipped'},{id:'STP-1041',pid:2,q:1,s:'In production'},{id:'STP-1040',pid:4,q:3,s:'Delivered'},{id:'STP-1039',pid:9,q:1,s:'Delivered'},{id:'STP-1038',pid:8,q:2,s:'Paid'}];
+const ok=p=>p.st==='approved',cname=id=>DATA.creators.find(c=>c.id===id)||{},inr=n=>'₹'+n.toLocaleString('en-IN');
+const db={
+pub:{products:()=>DATA.products.filter(ok),product:id=>DATA.products.find(p=>p.id==id&&ok(p)),creator:id=>DATA.creators.find(c=>c.id===id)},
+cre:{products:()=>DATA.products.filter(p=>p.cr===ME.cr),orders:()=>DATA.orders.filter(o=>byId(o.pid).cr===ME.cr),submit:d=>DATA.products.push({id:Date.now()%1e6,cr:ME.cr,st:'pending',...d})},
+adm:{products:()=>DATA.products,apps:()=>DATA.apps,orders:()=>DATA.orders,decide:(id,s)=>{const p=byId(id);p.st=s;p.note=s==='rejected'?'Rejected by admin. Edit the design and resubmit.':''}}};
+const CATS=[['','All'],['tee','Tees'],['hoodie','Hoodies'],['tote','Totes'],['cap','Caps']],XK={k:''},COL={Black:'#111',Cream:'#ece5cf',Lime:'#c8ff2d',Stone:'#7d7a68'};
+const SUB={creator:[['creator-dashboard','Overview'],['creator-products','Products'],['creator-new','Submit design'],['creator-store','Store'],['creator-orders','Orders'],['creator-earnings','Earnings']],admin:[['admin','Overview'],['admin-creators','Applications'],['admin-products','Products'],['admin-orders','Orders']]};
+const esc=s=>s.replace(/[^a-z0-9 ]/gi,c=>'&#'+c.charCodeAt(0)+';');
+const fd=f=>{const d=Object.fromEntries(new FormData(f));return{n:esc(d.n||'Untitled design'),t:d.t,c:COL[d.c],i:d.c==='Black'?'#c8ff2d':'#000',w:esc((d.w||'NEW').toUpperCase().slice(0,12)),g:d.g,p:+d.p||999}};
+const GRID=ps=>ps.length?`<div class='pg'>${ps.map(Card).join('')}</div>`:`<p class='hd'>Nothing here yet.</p>`;
+const Head=(t,s='')=>`<div class='sh'><h1 class='d'>${t}</h1>${s}</div>`,Sec=t=>`<div class='sh'><h2 class='d'>${t}</h2></div>`;
+const Tabs=on=>`<div class='chips'><a class='chip${on?'':' on'}' href='#explore'>Products</a><a class='chip${on?' on':''}' href='#creators'>Creators</a></div>`;
+const Badge=s=>`<span class='bd ${s}'>${s[0].toUpperCase()+s.slice(1)}</span>`;
+const Stat=(n,l)=>`<div class='stt'><b class='d'>${n}</b><span class='hd'>${l}</span></div>`;
+const Tbl=(h,r)=>`<div class='tb'><table><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.map(x=>`<tr>${x.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const Field=([n,l,t='text',o,v=''])=>`<label>${l}${t==='area'?`<textarea name='${n}' rows='3'>${v}</textarea>`:o?`<select name='${n}'>${o.map(x=>`<option>${x}</option>`).join('')}</select>`:`<input name='${n}' type='${t}' value='${v}' required>`}</label>`;
+const Form=(k,fs,b)=>`<form class='fm' data-nc='${k}'>${fs.map(Field).join('')}<p class='nc' role='status'></p><button class='btn p'>${b}</button></form>`;
+const Conn=()=>Sec('Connections')+Tbl(['Service','Will use','Status'],Object.entries(SVC).map(([k,[n,w]])=>[n,w,k==='auth'&&sb?`<span class='bd approved'>Connected</span>`:`<span class='bd rejected'>Not connected</span>`]));
+const Act=(a,id)=>`<button class='btn p sm' data-a='${a}' data-id='${id}' data-s='approved'>Approve</button><button class='btn sm' data-a='${a}' data-id='${id}' data-s='rejected'>Reject</button>`;
+const V={
+explore:()=>Head('Explore')+Tabs(0)+`<div class='chips'>${CATS.map(([k,n])=>`<button class='chip${XK.k===k?' on':''}' data-a='xf' data-id='${k}'>${n}</button>`).join('')}</div>`+GRID(db.pub.products().filter(p=>!XK.k||p.t===XK.k)),
+creators:()=>Head('Creators')+Tabs(1)+`<div class='cg'>${DATA.creators.map(Creator).join('')}</div>`,
+product:id=>{const p=db.pub.product(id);if(!p)return Head('Not available')+`<p>This product isn’t available. It may still be waiting for review.</p><a class='btn p' href='#explore'>Back to explore</a>`;const c=cname(p.cr);return `<div class='pd'><div class='ph'>${art(p)}</div><div><a class='hd' href='#store-${c.id}'>${c.name}, ${c.h}</a><h1 class='d'>${p.n}</h1><p class='pr'>${inr(p.p)}</p>${p.t==='tee'||p.t==='hoodie'?`<div class='chips'>${['S','M','L','XL'].map((z,i)=>`<button class='chip${i==1?' on':''}' data-a='sz'>${z}</button>`).join('')}</div>`:''}<button class='btn p' data-a='add' data-id='${p.id}'>Add to bag</button><p class='hd'>Made to order. Delivery times will come from the print partner once it’s connected.</p></div></div>`+Sec('More from '+c.name)+GRID(db.pub.products().filter(x=>x.cr===p.cr&&x.id!==p.id))},
+store:id=>{const c=db.pub.creator(id);if(!c)return Head('Store not found');const fo=S.fo.has(c.id);return `<div class='bn big' style='background:linear-gradient(120deg,${c.g[0]},${c.g[1]})'></div><div class='av d'>${c.name.split(' ').map(x=>x[0]).join('')}</div><div class='sh'><div><h1 class='d'>${c.name}</h1><p class='hd'>${c.h}, ${c.f} followers</p><p>${c.niche}</p></div><button class='btn${fo?'':' p'}' data-a='fo' data-id='${c.id}'>${fo?'Following':'Follow'}</button></div>`+GRID(db.pub.products().filter(p=>p.cr===c.id))},
+cart:()=>{const ids=Object.keys(S.c);let t=0;const r=ids.map(i=>{t+=byId(i).p*S.c[i];return Line(i,S.c[i])}).join('');return Head('Your bag')+(ids.length?`<div class='cw'>${r}<div class='tt'><span>Subtotal</span><span>${inr(t)}</span></div><p class='hd'>Shipping and taxes are worked out at checkout.</p><button class='btn p' disabled>Checkout unavailable</button><p class='nc on'>Payments aren’t connected yet, so orders can’t be placed.</p></div>`:`<p>Your bag is empty.</p><a class='btn p' href='#explore'>Find something to wear</a>`)},
+login:()=>Head('Sign in')+note()+(S.u?`<p class='nc on' role='status'>You’re signed in as ${esc(S.u.email||'your account')}. <a href='#' data-a='out'><u>Sign out</u></a></p>`:'')+Form('auth',[['email','Email','email'],['pw','Password','password']],'Sign in')+`<p class='hd'><a href='#forgot'><u>Forgot password?</u></a></p><p class='hd'>New here? <a href='#register'><u>Create an account</u></a>. You can browse and fill your bag without one.</p>`,
+register:()=>Head('Create account')+Form('auth',[['name','Name'],['email','Email','email'],['pw','Password','password']],'Create account')+`<p class='hd'>Already registered? <a href='#login'><u>Sign in</u></a></p>`,
+forgot:()=>Head('Reset password')+note()+`<p class='lede'>Enter your email and we’ll send you a link to choose a new password.</p>`+Form('auth',[['email','Email','email']],'Send reset link')+`<p class='hd'><a href='#login'><u>Back to sign in</u></a></p>`,
+'reset-password':()=>Head('Choose a new password')+Form('auth',[['pw','New password','password'],['pw2','Confirm new password','password']],'Save new password')+`<p class='hd'>Link not working? <a href='#forgot'><u>Request a new one</u></a></p>`,
+'creator-apply':()=>Head('Apply to sell')+`<p class='lede'>Tell us about your audience. An admin reviews every application before a storefront opens.</p>`+(sb&&!S.u?`<p class='nc on' role='status'>Sign in to send your application. <a href='#login'><u>Sign in</u></a> or <a href='#register'><u>create an account</u></a>.</p>`:'')+Form('db',[['name','Full name'],['h','Creator handle'],['link','Instagram or YouTube link','url'],['size','Audience size','text',['Under 10K','10K to 100K','100K to 1M','Over 1M']],['pitch','What would you make?','area']],'Send application'),
+'creator-dashboard':()=>{const ps=db.cre.products(),n=s=>ps.filter(p=>p.st===s).length;return Head('Hi, '+cname(ME.cr).name.split(' ')[0])+`<div class='sg'>${Stat(n('approved'),'Live')}${Stat(n('pending'),'In review')}${Stat(n('rejected'),'Rejected')}${Stat(db.cre.orders().length,'Orders')}</div><div class='row'><a class='btn p' href='#creator-new'>Submit a design</a><a class='btn' href='#store-${ME.cr}'>View my storefront</a></div>`+Conn()},
+'creator-products':()=>Head('My products',`<a class='btn p' href='#creator-new'>Submit a design</a>`)+Tbl(['Product','Price','Status'],db.cre.products().map(p=>[`<b>${p.n}</b>${p.note?`<div class='hd'>${p.note}</div>`:''}`,inr(p.p),Badge(p.st)]))+`<p class='hd'>You only see and manage your own products. Nothing is public until an admin approves it.</p>`,
+'creator-new':()=>Head('Submit a design')+`<div class='pd'><div class='ph' id='pvw'>${art({n:'Preview',t:'tee',c:COL.Black,i:'#c8ff2d',w:'NEW',g:'star'})}</div><form class='fm' id='nf'>${[['n','Product name'],['t','Product','text',['tee','hoodie','tote','cap']],['c','Colour','text',Object.keys(COL)],['w','Print text'],['g','Icon','text',['star','smile','bolt','ring']],['p','Price in ₹','number']].map(Field).join('')}<label>Artwork file<input type='file' disabled></label><p class='hd'>Artwork upload needs Supabase Storage, which isn’t connected. The text and icon stand in for your artwork. Submitting adds a Pending product for this session only.</p><button class='btn p'>Submit for review</button></form></div>`,
+'creator-store':()=>{const c=cname(ME.cr);return Head('Your store')+Form('db',[['n','Display name','text',0,c.name],['h','Handle','text',0,c.h],['bio','Bio','area',0,c.niche]],'Save store')+`<p class='hd'><a href='#store-${c.id}'><u>View public storefront</u></a></p>`},
+'creator-orders':()=>Head('Orders')+Tbl(['Order','Item','Qty','Status'],db.cre.orders().map(o=>[o.id,byId(o.pid).n,o.q,o.s]))+`<p class='hd'>Sample orders. Real orders will come from the database, with fulfilment status from the print partner.</p>`,
+'creator-earnings':()=>{const os=db.cre.orders(),sh=o=>Math.round(byId(o.pid).p*o.q*SH),t=os.reduce((s,o)=>s+sh(o),0),w=os.filter(o=>o.s!=='Delivered').reduce((s,o)=>s+sh(o),0);return Head('Earnings')+`<div class='sg'>${Stat(inr(t),'Earned')}${Stat(inr(w),'Not yet delivered')}${Stat(inr(0),'Paid out')}</div>`+Tbl(['Order','Sale','Your share'],os.map(o=>[o.id,inr(byId(o.pid).p*o.q),inr(sh(o))]))+`<p class='hd'>Sample figures with a placeholder ${Math.round(SH*100)}% share. Payouts aren’t connected.</p>`},
+'admin-login':()=>Head('Admin sign in')+Form('auth',[['email','Admin email','email'],['pw','Password','password']],'Sign in')+`<p class='hd'>In production this area only loads for accounts with the admin role.</p>`,
+admin:()=>{const p=db.adm.products(),a=db.adm.apps();return Head('Admin')+`<div class='sg'>${Stat(a.filter(x=>x.st==='pending').length,'Applications waiting')}${Stat(p.filter(x=>x.st==='pending').length,'Products waiting')}${Stat(db.adm.orders().length,'Orders')}</div>`+Conn()},
+'admin-creators':()=>Head('Creator applications')+Tbl(['Creator','Audience','Status','Decision'],db.adm.apps().map(x=>[`<b>${x.name}</b><div class='hd'>${x.h}</div>`,x.plat,Badge(x.st),x.st==='pending'?Act('da',x.id):'Decided']))+`<p class='hd'>Decisions change this session only. Real decisions will be saved by the database.</p>`,
+'admin-products':()=>Head('Product approvals')+Tbl(['Product','Creator','Status','Decision'],db.adm.products().map(p=>[`<b>${p.n}</b>`,cname(p.cr).name,Badge(p.st),p.st==='pending'?Act('dp',p.id):'Decided']))+`<p class='hd'>Approving changes this session only. Approved products then appear in Explore.</p>`,
+'admin-orders':()=>Head('Orders')+Tbl(['Order','Item','Creator','Total','Status'],db.adm.orders().map(o=>{const p=byId(o.pid);return[o.id,p.n,cname(p.cr).name,inr(p.p*o.q),o.s]}))+`<p class='hd'>Sample orders. Print-partner status will sync here once it’s connected.</p>`};
+const area=(k,h)=>{const a=/^creator-(?!apply)/.test(k)?'creator':/^admin(?!-login)/.test(k)?'admin':'';return a?`<div class='pv'><b>${a==='admin'?'Admin':'Creator'} area, layout preview.</b> Sample data only. The database isn’t connected and these pages aren’t locked to signed-in users yet, so nothing here is protected or saved.</div><div class='chips'>${SUB[a].map(([r,n])=>`<a class='chip${r===k?' on':''}' href='#${r}'>${n}</a>`).join('')}</div>`+h:h};
+const draw=()=>{const h=location.hash.slice(1)||'home',m=h.match(/^(product|store)-(.+)$/),k=m?m[1]:h,v=Object.hasOwn(V,k);$('#top').hidden=v;$('#view').hidden=!v;if(v)$('#view').innerHTML=area(k,V[k](m&&m[2]));return[h,v]};
+const route=()=>{const[h,v]=draw(),e=document.getElementById(h);$('#menu').classList.remove('on');v||!e||h==='top'?scrollTo(0,0):e.scrollIntoView()};
+addEventListener('hashchange',route);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;
+if(a==='out'&&sb)signOut();
+if(a==='go'){location.hash=id;cart(false)}
+if(a==='xf'){XK.k=id;draw()}
+if(a==='sz')$$('[data-a=sz]').forEach(x=>x.classList.toggle('on',x===b));
+if(a==='da'){DATA.apps.find(x=>x.id==id).st=b.dataset.s;draw()}
+if(a==='dp'){db.adm.decide(id,b.dataset.s);draw()}
+if((a==='q'||a==='add')&&location.hash==='#cart')draw()});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target,k=f.dataset.nc;
+if(k==='auth'&&sb&&Object.hasOwn(AF,location.hash.slice(1)))run(f);
+else if(k==='db'&&sb&&!S.u&&location.hash==='#creator-apply'){const n=f.querySelector('.nc');n.innerHTML='Please <a href="#login"><u>sign in</u></a> or <a href="#register"><u>create an account</u></a> to send your application.';n.classList.add('on')}
+else if(k==='auth'&&sb){const n=f.querySelector('.nc');n.textContent='Admin sign-in needs an admin role in the database, which isn’t set up yet, so this form submits nothing.';n.classList.add('on')}
+else if(k){const n=f.querySelector('.nc');n.textContent=SVC[k][0]+' isn’t connected yet ('+SVC[k][1]+'), so this form submits nothing.';n.classList.add('on')}
+else if(f.id==='nf'){db.cre.submit(fd(f));location.hash='creator-products';toast('Design submitted for review. Saved for this session only.')}});
+document.addEventListener('input',e=>{const f=e.target.form;if(f&&f.id==='nf')$('#pvw').innerHTML=art(fd(f))});
+
+/* ===== H. AUTH: Supabase Auth. Email links return to CFG.SITE_URL, never a hard-coded localhost ===== */
+const CFG=window.STOOP_CONFIG||{};
+const MSG=e=>{const s=((e.code||'')+' '+(e.message||'')).toLowerCase();
+return e.status===429||/rate.?limit|too many|only request this after/.test(s)?'Too many emails or attempts. Please wait a few minutes, then try again.'
+:/invalid_credentials|invalid login/.test(s)?'Incorrect email or password. Check both and try again.'
+:/not_confirmed|not confirmed/.test(s)?'Please confirm your email first. Check your inbox for the confirmation link.'
+:/expired|session.?missing|session_not_found|invalid.*(token|link)/.test(s)?'This link has expired or was already used. Request a new one.'
+:/weak_password|at least|too weak/.test(s)?'That password is too weak. Use a longer one with letters and numbers.'
+:/same_password|different from the old/.test(s)?'Choose a password you haven’t used before.'
+:/already|registered/.test(s)?'An account with this email already exists. Try signing in instead.'
+:/fetch|network/.test(s)?'Can’t reach the sign-in service. Check your connection and try again.'
+:'Something went wrong. Please try again.'};
+const note=()=>{const m=S.msg;S.msg='';return m?`<p class='nc on' role='status'>${m}</p>`:''};
+const back=()=>(CFG.SITE_URL||location.origin+location.pathname).split('#')[0];
+if(/[?#&]error(_code)?=/.test(location.search+location.hash)){history.replaceState(null,'',location.pathname+'#forgot');S.msg=MSG({code:'otp_expired'})}
+const KEY=CFG.SUPABASE_PUBLISHABLE_KEY||CFG.SUPABASE_ANON_KEY,LK=(location.hash.match(/[#&]type=(\w+)/)||[])[1];
+const sb=CFG.SUPABASE_URL&&KEY&&window.supabase?window.supabase.createClient(CFG.SUPABASE_URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'implicit'}}):null;
+if(!sb)console.warn('STOOP auth: add SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY in STOOP_CONFIG to turn on sign-in.');
+const authUI=()=>$$('[data-au]').forEach(a=>{if(a.dataset.o===undefined)a.dataset.o=a.dataset.a||'';const i=!!S.u;a.textContent=i?'Sign out':'Sign in';a.setAttribute('href',i?'#':'#login');if(i)a.dataset.a='out';else if(a.dataset.o)a.dataset.a=a.dataset.o;else delete a.dataset.a});
+const who=u=>{const was=!!S.u;S.u=u||null;authUI();if(was!==!!S.u&&/^(login|creator-apply)$/.test(location.hash.slice(1)))draw()};
+const signOut=async()=>{$('#menu').classList.remove('on');const{error}=await sb.auth.signOut({scope:'local'});toast(error?MSG(error):'You’ve been signed out.')};
+sb&&sb.auth.onAuthStateChange((ev,ss)=>{if(ev==='PASSWORD_RECOVERY')location.hash='reset-password';setTimeout(()=>who(ss&&ss.user),0)});
+sb&&sb.auth.getSession().then(({data})=>{who(data.session&&data.session.user);if(LK==='signup'&&S.u)toast('Email confirmed. You’re signed in.')});
+const say=(f,t)=>{const n=f.querySelector('.nc');n.textContent=t;n.classList.add('on')};
+const AF={
+login:async(f,d)=>{const{error}=await sb.auth.signInWithPassword({email:d.email.trim(),password:d.pw});say(f,error?MSG(error):'Signed in. Welcome back to STOOP.');if(!error)toast('Signed in. Welcome back to STOOP.')},
+register:async(f,d)=>{const{data,error}=await sb.auth.signUp({email:d.email.trim(),password:d.pw,options:{data:{name:d.name},emailRedirectTo:back()}});say(f,error?MSG(error):data.session?'Account created. You’re signed in.':'Account created. Check your email for a confirmation link.')},
+forgot:async(f,d)=>{const{error}=await sb.auth.resetPasswordForEmail(d.email.trim(),{redirectTo:back()});say(f,error?MSG(error):'If an account exists for that email, a reset link is on its way. Check your inbox and spam folder.')},
+'reset-password':async(f,d)=>{if(d.pw!==d.pw2)return say(f,'The two passwords don’t match. Type the same password in both boxes.');
+const{error}=await sb.auth.updateUser({password:d.pw});if(error)return say(f,MSG(error));
+await sb.auth.signOut({scope:'local'});who(null);S.msg='Password updated. Sign in with your new password.';location.hash='login'}};
+const run=async f=>{const b=f.querySelector('button.btn');b.disabled=true;say(f,'One moment…');try{await AF[location.hash.slice(1)](f,Object.fromEntries(new FormData(f)))}catch(x){say(f,MSG(x))}b.disabled=false};
+
+/* ===== F. BOOT ===== */
+(async()=>{
+const [cs,ps,ct]=await Promise.all([API.creators(),API.products(),API.cats()]);
+$('#stack').innerHTML=[2,1,4].map(i=>`<div class="ph">${art(byId(i))}</div>`).join('');
+$('#cr').innerHTML=cs.map(Creator).join('');
+$('#cat').innerHTML=ct.map(Cat).join('');
+$('#chips').innerHTML=[{k:'',n:'All'},...ct].map(c=>`<button class="chip${c.k?'':' on'}" data-a="f" data-id="${c.k}">${c.n}</button>`).join('');
+const words=['New drop every Friday','Printed on demand','Verified creators only','Limited runs','Shipped worldwide'].map(w=>`<span>${w}</span><span>★</span>`).join('');
+$('#mq').innerHTML=words+words;
+filter('');renderCart();sync();
+const T=Date.now()+2.4*36e5,f=n=>String(n).padStart(2,'0'),tick=()=>{const s=Math.max(0,(T-Date.now())/1e3|0);$('#cd').textContent=`${f(s/3600|0)}:${f(s/60%60|0)}:${f(s%60)}`};tick();setInterval(tick,1e3);route();
+})();
+</script>
+</body>
+</html>
